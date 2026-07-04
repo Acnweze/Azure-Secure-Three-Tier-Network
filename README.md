@@ -2,37 +2,30 @@
 
 ## Project Overview
 
-This project demonstrates the deployment of a secure three-tier architecture in Microsoft Azure using Virtual Networks, Subnets, Network Security Groups (NSGs), Linux Virtual Machines, Apache Web Server, and MySQL.
+This project demonstrates how to build and secure a three-tier network architecture in Microsoft Azure using Virtual Networks (VNets), Subnets, Network Security Groups (NSGs), Ubuntu Linux Virtual Machines, Apache Web Server, and MySQL.
 
-The environment was designed to separate the Web, Application, and Database tiers while enforcing secure communication between them using Azure networking and security best practices.
+The objective was to design a secure environment where each application tier communicates only with the required tier while minimizing unnecessary exposure to the public internet.
 
 ---
 
 ## Architecture
 
-![Architecture Diagram](Architecture-Diagram.png)
+![Architecture Diagram](images/Architecture-Diagram.png)
 
----
+### Architecture Flow
 
-## Architecture Components
-
-### Web Tier
-- Ubuntu Linux Virtual Machine
-- Apache Web Server
-- Public access on HTTP (Port 80)
-- SSH access restricted to my public IP
-
-### Application Tier
-- Ubuntu Linux Virtual Machine
-- Python HTTP Server running on Port 8080
-- Accessible only from the Web subnet
-- Internal communication only
-
-### Database Tier
-- Ubuntu Linux Virtual Machine
-- MySQL Server installed and running
-- Port 3306 accessible only from the Application subnet
-- No public database access
+```text
+Internet
+    │
+    ▼
+Web VM (Web Subnet)
+    │
+    ▼
+Application VM (App Subnet)
+    │
+    ▼
+Database VM (Database Subnet)
+```
 
 ---
 
@@ -41,66 +34,58 @@ The environment was designed to separate the Web, Application, and Database tier
 - Azure Virtual Network (VNet)
 - Subnets
 - Network Security Groups (NSGs)
-- Linux Virtual Machines
+- Ubuntu Linux Virtual Machines
 - Public IP Addresses
 - Network Interfaces
-- SSH
 - Azure Cloud Shell
+- SSH
 
 ---
 
 ## Network Design
 
 | Tier | Subnet | Purpose |
-|-------|---------|---------|
-| Web | WebSubnet | Hosts the Apache web server |
-| Application | AppSubnet | Hosts the application server |
-| Database | DatabaseSubnet | Hosts the MySQL database |
-
-Traffic Flow:
-
-```
-Internet
-    │
-    ▼
-Web VM
-    │
-    ▼
-Application VM
-    │
-    ▼
-Database VM
-```
+|------|---------|---------|
+| Web | WebSubnet | Hosts the Apache Web Server |
+| Application | AppSubnet | Hosts the Python Application |
+| Database | DatabaseSubnet | Hosts the MySQL Database |
 
 ---
 
 ## Security Configuration
 
-### Web VM
-- SSH allowed only from my public IP
-- HTTP (Port 80) allowed from the Internet
+### Web Tier
 
-### Application VM
-- Port 8080 allowed only from the Web subnet
-- No public application access
+- Apache Web Server
+- Public HTTP access
+- SSH restricted to my public IP
 
-### Database VM
-- MySQL Port 3306 allowed only from the Application subnet
-- Database isolated from the Internet
+### Application Tier
+
+- Python HTTP Server running on Port 8080
+- Accessible only from the Web subnet
+- No direct public access
+
+### Database Tier
+
+- MySQL Server
+- Port 3306 restricted to the Application subnet
+- No Internet access
 
 ---
 
-## Connectivity Testing
+## Connectivity Tests
 
-The following tests were performed successfully:
+The following tests were completed successfully:
 
-- SSH connectivity
-- Web server accessibility
-- Application server connectivity on Port 8080
-- Ping between virtual machines
-- MySQL service verification
+- SSH into Web VM
+- Web VM → Application VM connectivity
+- Application VM → Database VM connectivity
+- Python server running on Port 8080
+- MySQL installation and service verification
 - Network Security Group validation
-- Port connectivity testing using Netcat (nc)
+- Port testing using Netcat (`nc`)
+- ICMP testing using `ping`
 
 ---
 
@@ -108,83 +93,101 @@ The following tests were performed successfully:
 
 ### Virtual Machines
 
-![Virtual Machines](virtual-machines.png)
+![Virtual Machines](images/virtual-machines.png)
 
-### Web VM NSG Rules
+### Web VM NSG
 
-![Web NSG](webvm-nsg-rules.png)
+![Web VM NSG](images/webvm-nsg-rules.png)
 
-### App VM NSG Rules
+### Application VM NSG
 
-![App NSG](appvm-nsg-rules.png)
+![Application VM NSG](images/appvm-nsg-rules.png)
 
-### Database VM NSG Rules
+### Database VM NSG
 
-![Database NSG](databasevm-nsg-rules.png)
+![Database VM NSG](images/databasevm-nsg-rules.png)
 
 ### Application Server Running
 
-![Application Server](app-server-8080.png)
+![Application Server](images/app-server-8080.png)
 
 ### Application Connectivity Test
 
-![Application Connectivity](app-server-connectivity.png)
+![Application Connectivity](images/app-server-connectivity.png)
 
-### Database Port Test
+### Database Connectivity Test
 
-![Database Port Test](database-port-test.png)
+![Database Connectivity](images/database-port-test.png)
 
 ### Ping Test
 
-![Ping Test](ping-app-database.png)
+![Ping Test](images/ping-app-database.png)
 
 ### MySQL Running
 
-![MySQL Running](mysql-running.png)
-
-### Database MySQL Status
-
-![Database MySQL](databasevm-mysql-running.png)
-
-### APT Update
-
-![APT Update](databasevm-apt-update.png)
+![MySQL Running](images/mysql-running.png)
 
 ---
 
 ## Skills Demonstrated
 
-- Azure Virtual Networking
+- Azure Networking
+- Azure Virtual Networks
 - Azure Network Security Groups
 - Linux Administration
+- SSH
 - Apache Web Server
-- MySQL Installation
+- MySQL
 - Network Troubleshooting
-- SSH Administration
-- Azure Infrastructure
-- Cloud Security
-- Infrastructure Documentation
+- Infrastructure Security
+- Cloud Infrastructure Documentation
 
 ---
 
 ## Repository Structure
 
-```
+```text
 Azure-Secure-Three-Tier-Network/
 │
+├── README.md
+├── images/
 ├── scripts/
 │   ├── apache-setup.sh
 │   ├── app-server.sh
 │   └── mysql-setup.sh
-│
-├── Architecture-Diagram.png
-├── README.md
-├── *.png
 ```
 
 ---
 
+## Key Learning Outcomes
+
+- Designed a secure three-tier Azure network.
+- Configured Network Security Groups to control traffic between tiers.
+- Deployed and managed Ubuntu virtual machines.
+- Tested secure communication between application tiers.
+- Practiced Linux administration and network troubleshooting in Azure.
+
+---
+
 ## Author
+
+**Agatha Nweze**
+
+**Azure Cloud Support Engineer | Azure Administrator | Linux | Azure Networking**
+
+GitHub: https://github.com/Acnweze
+
+
+
+
+
+
+
+
+
+
+
+
 
 **Agatha Nweze**
 
