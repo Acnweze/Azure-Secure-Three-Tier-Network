@@ -176,22 +176,3 @@ Azure-Secure-Three-Tier-Network/
 **Azure Cloud Support Engineer | Azure Administrator | Linux | Azure Networking**
 
 GitHub: https://github.com/Acnweze
-
-
-
-
-
-
-
-
-
-
-
-
-
-**Agatha Nweze**
-
-Azure Cloud Support Engineer | Azure Administrator | Linux | Azure Networking
-
-GitHub:
-https://github.com/Acnweze
