@@ -1,7 +1,0 @@
-Internet
-   ↓
-WebVM / WebSubnet
-   ↓
-AppVM / AppSubnet
-   ↓
-DatabaseVM / DatabaseSubnet
